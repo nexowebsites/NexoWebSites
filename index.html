@@ -98,12 +98,16 @@ h2{font-family:var(--titulo);font-weight:800;font-size:clamp(1.9rem,3.6vw,2.8rem
 .trabajos{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
 .caso{display:block;border-radius:22px;background:#fff;border:1px solid var(--hielo);overflow:hidden;transition:transform .25s,box-shadow .25s}
 .caso:hover{transform:translateY(-6px);box-shadow:0 28px 44px -26px rgba(15,58,122,.55)}
-.vista{height:250px;overflow:hidden;background:var(--nube);padding:16px 16px 0;position:relative}
+.vista{height:250px;overflow:hidden;background:var(--nube);position:relative}
+.vista img{width:100%;display:block;transition:transform 4s ease-in-out}
+/* Se recorre al pasar el cursor (computadora) o al estar en pantalla (celular) */
+.caso:hover .vista img,.caso.activa .vista img{transform:translateY(calc(-100% + 250px))}
+.vista .respaldo{padding:16px 16px 0;height:100%}
 .mini{background:#fff;border-radius:12px 12px 0 0;box-shadow:0 0 0 1px var(--hielo);height:100%;overflow:hidden}
 .mini .tira{height:18px;background:var(--nube);display:flex;align-items:center;gap:4px;padding-left:8px}
 .mini .tira i{width:6px;height:6px;border-radius:50%;background:#cfe1f6}
-.pagina{padding:10px;display:grid;gap:8px;transition:transform 2.6s ease-in-out}
-.caso:hover .pagina{transform:translateY(-62%)}
+.pagina{padding:10px;display:grid;gap:8px;transition:transform 3s ease-in-out}
+.caso:hover .pagina,.caso.activa .pagina{transform:translateY(-55%)}
 .pagina .h{height:96px;border-radius:8px;background:var(--c);padding:12px;display:flex;flex-direction:column;justify-content:center;gap:6px}
 .pagina .h s{height:9px;width:55%;border-radius:5px;background:#fff}.pagina .h s+s{height:6px;width:35%;opacity:.6}
 .pagina .g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
@@ -114,6 +118,8 @@ h2{font-family:var(--titulo);font-weight:800;font-size:clamp(1.9rem,3.6vw,2.8rem
 .info{padding:20px 22px 24px}
 .info h3{font-family:var(--titulo);font-size:1.35rem;color:var(--noche);margin-bottom:4px}
 .info p{color:var(--suave);font-size:.95rem}
+.ir{display:inline-block;margin-top:12px;font-weight:600;color:var(--azul);transition:transform .2s}
+.caso:hover .ir{transform:translateX(4px)}
 
 /* Proceso */
 .proceso{background:linear-gradient(160deg,var(--noche),var(--marino));color:#fff}
@@ -153,6 +159,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .lienzo>*{opacity:1;transform:none}
+  .caso.activa .vista img,.caso.activa .pagina{transform:none}
 }
 </style>
 </head>
@@ -231,7 +238,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   <div class="wrap">
     <div class="cabecera">
       <h2>Nuestros trabajos</h2>
-      <p>Pasá el cursor sobre cada proyecto y mirá cómo se recorre la página.</p>
+      <p>Mirá cómo se recorre cada página y tocá la que quieras visitar.</p>
     </div>
     <div class="trabajos" id="trabajos-lista"></div>
   </div>
@@ -283,8 +290,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <script>
 /* ====== EDITÁ AQUÍ TUS PROYECTOS ====== */
 const proyectos = [
-  {empresa:"Excelencia Animal",    desc:"Carta digital y reservas en línea.",        color:"#2563b8"},
-  {empresa:"Pilates Health Center Studio", desc:"Portafolio de arquitectura con galería.",   color:"#0f3a7a"}
+  {empresa:"Aroma Café",    desc:"Carta digital y reservas en línea.",      url:"https://www.ejemplo1.com", color:"#2563b8"},
+  {empresa:"Estudio Mares", desc:"Portafolio de arquitectura con galería.", url:"https://www.ejemplo2.com", color:"#0f3a7a"}
+  /* Opcional: agregá  imagen:"capturas/aroma.png"  para usar tu propia captura */
 ];
 /* ======================================= */
 
@@ -292,16 +300,36 @@ const proyectos = [
 const WHATSAPP = "5491164230041";
 /* ======================================================================= */
 
-document.getElementById('trabajos-lista').innerHTML=proyectos.map(p=>`
-  <article class="caso">
-    <div class="vista"><div class="mini"><div class="tira"><i></i><i></i><i></i></div>
-      <div class="pagina" style="--c:${p.color}">
-        <div class="h"><s></s><s></s></div><div class="g"><s></s><s></s><s></s></div>
-        <div class="l"></div><div class="l" style="width:70%"></div><div class="banda"></div>
-        <div class="g"><s></s><s></s><s></s></div><div class="l"></div><div class="banda"></div>
-      </div></div></div>
-    <div class="info"><h3>${p.empresa}</h3><p>${p.desc}</p></div>
-  </article>`).join('');
+const captura = u => `https://image.thum.io/get/width/900/crop/1500/${u}`;
+
+/* Si la captura no carga, muestra una vista dibujada */
+function respaldo(img){
+  const c = img.dataset.color;
+  img.parentElement.innerHTML = `<div class="respaldo"><div class="mini"><div class="tira"><i></i><i></i><i></i></div>
+    <div class="pagina" style="--c:${c}">
+      <div class="h"><s></s><s></s></div><div class="g"><s></s><s></s><s></s></div>
+      <div class="l"></div><div class="l" style="width:70%"></div><div class="banda"></div>
+    </div></div></div>`;
+}
+
+document.getElementById('trabajos-lista').innerHTML = proyectos.map(p=>`
+  <a class="caso" href="${p.url}" target="_blank" rel="noopener" aria-label="Visitar la página de ${p.empresa}">
+    <div class="vista">
+      <img src="${p.imagen || captura(p.url)}" alt="Vista previa de la página de ${p.empresa}" loading="lazy" data-color="${p.color}" onerror="respaldo(this)">
+    </div>
+    <div class="info"><h3>${p.empresa}</h3><p>${p.desc}</p><span class="ir">Visitar página ↗</span></div>
+  </a>`).join('');
+
+/* Celular: la vista se recorre sola cuando la tarjeta aparece en pantalla */
+if('IntersectionObserver' in window){
+  const obs = new IntersectionObserver(items=>{
+    items.forEach(it=>{
+      if(it.isIntersecting){ setTimeout(()=>it.target.classList.add('activa'),400); }
+      else { it.target.classList.remove('activa'); }
+    });
+  },{threshold:.6});
+  document.querySelectorAll('.caso').forEach(c=>obs.observe(c));
+}
 
 /* Palabra que cambia en el título */
 const palabras=['enamore','venda','destaque','inspire'];let k=0;
