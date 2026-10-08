@@ -290,8 +290,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 <script>
 /* ====== EDITÁ AQUÍ TUS PROYECTOS ====== */
 const proyectos = [
-  {empresa:"Aroma Café",    desc:"Carta digital y reservas en línea.",      url:"https://www.ejemplo1.com", color:"#2563b8"},
-  {empresa:"Estudio Mares", desc:"Portafolio de arquitectura con galería.", url:"https://www.ejemplo2.com", color:"#0f3a7a"}
+  {empresa:"Pilates Studio Health Center",    desc:"Inscripciones online y visualización de actividades.",      url:"https://nexowebsites.github.io/PILATES-WEB/#inicio", color:"#2563b8"},
+  {empresa:"Excelencia Animal", desc:"Vista de productos.", url:"https://nexowebsites.github.io/ExcelenciaAnimal/#", color:"#0f3a7a"}
   /* Opcional: agregá  imagen:"capturas/aroma.png"  para usar tu propia captura */
 ];
 /* ======================================= */
@@ -332,7 +332,7 @@ if('IntersectionObserver' in window){
 }
 
 /* Palabra que cambia en el título */
-const palabras=['enamore','venda','destaque','inspire'];let k=0;
+const palabras=['venda','destaque','inspire'];let k=0;
 const pal=document.getElementById('palabra');
 pal.style.transition='opacity .25s';
 setInterval(()=>{k=(k+1)%palabras.length;pal.style.opacity=0;setTimeout(()=>{pal.textContent=palabras[k];pal.style.opacity=1},250)},2800);
