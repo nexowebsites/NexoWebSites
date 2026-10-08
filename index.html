@@ -1,1 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NexoWebSites | Páginas web para empresas</title>
+<meta name="description" content="NexoWebSites crea páginas web modernas para empresas que quieren destacar.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%232563b8'/><path d='M18 48V16h6l16 22V16h6v32h-6L24 26v22z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blanco:#ffffff; --nube:#f3f8fe; --hielo:#e3effc;
+  --cielo:#5eb3e8; --azul:#2563b8; --marino:#0f3a7a; --noche:#0a2350;
+  --texto:#14284b; --suave:#5a6c8c;
+  --titulo:'Bricolage Grotesque','Trebuchet MS',sans-serif;
+  --cuerpo:'Figtree','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--cuerpo);color:var(--texto);background:var(--blanco);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--cielo);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,92%);margin:0 auto}
 
+/* Menú */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--hielo)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--titulo);font-weight:800;font-size:1.25rem;color:var(--marino)}
+.marca svg{width:34px;height:34px}
+.marca span{color:var(--azul)}
+nav ul{display:flex;gap:28px;list-style:none;font-weight:500}
+nav ul a{color:var(--suave);transition:color .2s}
+nav ul a:hover{color:var(--azul)}
+.btn{display:inline-block;border:0;cursor:pointer;font:600 1rem var(--cuerpo);padding:14px 26px;border-radius:999px;background:linear-gradient(135deg,var(--azul),var(--marino));color:#fff;box-shadow:0 10px 24px -10px rgba(37,99,184,.7);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 16px 28px -10px rgba(37,99,184,.8)}
+.btn.claro{background:#fff;color:var(--azul);box-shadow:inset 0 0 0 2px var(--hielo)}
+.btn.claro:hover{box-shadow:inset 0 0 0 2px var(--cielo)}
+nav .btn{padding:10px 20px}
+
+/* Bienvenida */
+.hero{position:relative;padding:72px 0 96px;background:radial-gradient(900px 500px at 85% 10%,var(--hielo),transparent 70%),linear-gradient(180deg,var(--nube),#fff)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.saludo{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--hielo);padding:8px 16px;border-radius:999px;font-weight:600;color:var(--azul);font-size:.95rem;box-shadow:0 6px 18px -10px rgba(37,99,184,.4)}
+.saludo i{font-style:normal;display:inline-block;animation:mano 2.4s ease-in-out infinite;transform-origin:70% 70%}
+@keyframes mano{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-10deg)}}
+h1{font-family:var(--titulo);font-weight:800;font-size:clamp(2.4rem,5.4vw,4.2rem);line-height:1.04;letter-spacing:-.02em;color:var(--noche);margin:22px 0 18px}
+h1 em{font-style:normal;background:linear-gradient(120deg,var(--azul),var(--cielo));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:1.2rem;color:var(--suave);max-width:46ch}
+.acciones{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+
+/* Navegador animado */
+.escena{perspective:1100px;position:relative}
+.nav-demo{background:#fff;border-radius:20px;box-shadow:0 40px 80px -30px rgba(15,58,122,.45),0 0 0 1px var(--hielo);overflow:hidden;transform-style:preserve-3d;transition:transform .15s ease-out}
+.barra{display:flex;align-items:center;gap:7px;padding:12px 16px;background:var(--nube);border-bottom:1px solid var(--hielo)}
+.barra i{width:11px;height:11px;border-radius:50%;background:#cfe1f6}
+.barra .url{margin-left:12px;flex:1;background:#fff;border-radius:999px;padding:4px 14px;font-size:.78rem;color:var(--suave)}
+.lienzo{padding:22px;display:grid;gap:14px;min-height:340px;align-content:start}
+.lienzo>*{opacity:0;transform:translateY(14px) scale(.97)}
+.lienzo.arma>*{animation:entra .55s cubic-bezier(.2,.8,.3,1) forwards}
+.lienzo.arma>*:nth-child(1){animation-delay:.2s}.lienzo.arma>*:nth-child(2){animation-delay:.55s}
+.lienzo.arma>*:nth-child(3){animation-delay:.9s}.lienzo.arma>*:nth-child(4){animation-delay:1.25s}
+.lienzo.arma>*:nth-child(5){animation-delay:1.6s}
+@keyframes entra{to{opacity:1;transform:none}}
+.b-menu{display:flex;justify-content:space-between;align-items:center}
+.b-menu u{width:60px;height:12px;border-radius:6px;background:var(--azul)}
+.b-menu span{display:flex;gap:8px}.b-menu span s{width:34px;height:8px;border-radius:4px;background:var(--hielo)}
+.b-hero{height:120px;border-radius:14px;background:linear-gradient(135deg,var(--azul),var(--cielo));padding:20px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.b-hero s{height:14px;width:62%;border-radius:7px;background:#fff}
+.b-hero s+s{height:9px;width:40%;background:rgba(255,255,255,.6)}
+.b-hero u{width:78px;height:24px;border-radius:12px;background:var(--noche)}
+.b-filas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.b-filas s{height:64px;border-radius:12px;background:var(--hielo)}
+.b-filas s:nth-child(2){background:#cfe3fa}
+.b-texto{display:grid;gap:8px}.b-texto s{height:9px;border-radius:5px;background:var(--hielo)}.b-texto s:nth-child(2){width:80%}.b-texto s:nth-child(3){width:55%}
+.b-listo{justify-self:start;background:#e6f7ee;color:#1a7f4b;font-weight:600;font-size:.82rem;padding:6px 14px;border-radius:999px}
+.flota{position:absolute;right:-14px;bottom:-24px;background:#fff;border-radius:16px;padding:12px 18px;font-weight:600;font-size:.9rem;color:var(--marino);box-shadow:0 18px 36px -14px rgba(15,58,122,.5);animation:flota 4s ease-in-out infinite}
+@keyframes flota{50%{transform:translateY(-10px)}}
+
+/* Secciones */
+section{padding:96px 0}
+.cabecera{max-width:640px;margin-bottom:44px}
+h2{font-family:var(--titulo);font-weight:800;font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.1;letter-spacing:-.015em;color:var(--noche);margin-bottom:12px}
+.cabecera p{color:var(--suave);font-size:1.1rem}
+
+/* Servicios */
+.servicios{background:var(--nube)}
+.rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.serv{background:#fff;border-radius:22px;padding:30px;border:1px solid var(--hielo);transition:transform .25s,box-shadow .25s}
+.serv:hover{transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(37,99,184,.5)}
+.serv .ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;background:linear-gradient(135deg,var(--hielo),#fff);margin-bottom:18px;transition:transform .35s}
+.serv:hover .ico{transform:rotate(-8deg) scale(1.12)}
+.serv h3{font-family:var(--titulo);font-size:1.25rem;color:var(--marino);margin-bottom:6px}
+.serv p{color:var(--suave)}
+
+/* Trabajos */
+.trabajos{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+.caso{display:block;border-radius:22px;background:#fff;border:1px solid var(--hielo);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.caso:hover{transform:translateY(-6px);box-shadow:0 28px 44px -26px rgba(15,58,122,.55)}
+.vista{height:250px;overflow:hidden;background:var(--nube);padding:16px 16px 0;position:relative}
+.mini{background:#fff;border-radius:12px 12px 0 0;box-shadow:0 0 0 1px var(--hielo);height:100%;overflow:hidden}
+.mini .tira{height:18px;background:var(--nube);display:flex;align-items:center;gap:4px;padding-left:8px}
+.mini .tira i{width:6px;height:6px;border-radius:50%;background:#cfe1f6}
+.pagina{padding:10px;display:grid;gap:8px;transition:transform 2.6s ease-in-out}
+.caso:hover .pagina{transform:translateY(-62%)}
+.pagina .h{height:96px;border-radius:8px;background:var(--c);padding:12px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.pagina .h s{height:9px;width:55%;border-radius:5px;background:#fff}.pagina .h s+s{height:6px;width:35%;opacity:.6}
+.pagina .g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pagina .g s{height:50px;border-radius:7px;background:var(--hielo)}
+.pagina .g s:first-child{background:color-mix(in srgb,var(--c) 35%,#fff)}
+.pagina .l{height:7px;border-radius:4px;background:var(--hielo)}
+.pagina .banda{height:56px;border-radius:8px;background:color-mix(in srgb,var(--c) 22%,#fff)}
+.info{padding:20px 22px 24px}
+.info h3{font-family:var(--titulo);font-size:1.35rem;color:var(--noche);margin-bottom:4px}
+.info p{color:var(--suave);font-size:.95rem}
+
+/* Proceso */
+.proceso{background:linear-gradient(160deg,var(--noche),var(--marino));color:#fff}
+.proceso h2{color:#fff}.proceso .cabecera p{color:#b9d0f0}
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:p}
+.paso{position:relative;padding:26px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);transition:background .25s,transform .25s}
+.paso:hover{background:rgba(255,255,255,.14);transform:translateY(-4px)}
+.paso::before{counter-increment:p;content:counter(p);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--cielo);color:var(--noche);font:800 1.05rem var(--titulo);margin-bottom:16px}
+.paso h3{font-family:var(--titulo);font-size:1.15rem;margin-bottom:6px}
+.paso p{color:#b9d0f0;font-size:.95rem}
+
+/* Contacto */
+.contacto .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contacto ul{list-style:none;margin-top:24px;display:grid;gap:12px;color:var(--suave)}
+form{background:var(--nube);padding:32px;border-radius:24px;display:grid;gap:16px}
+label{display:grid;gap:6px;font-weight:600;font-size:.92rem;color:var(--marino)}
+input,textarea{font:400 1rem var(--cuerpo);padding:13px 16px;border-radius:14px;border:2px solid transparent;background:#fff;color:var(--texto);transition:border-color .2s}
+input:focus,textarea:focus{outline:0;border-color:var(--cielo)}
+textarea{min-height:120px;resize:vertical}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:10px}
+.aviso{font-size:.85rem;color:var(--suave);text-align:center}
+
+footer{border-top:1px solid var(--hielo);padding:30px 0;color:var(--suave);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+
+@media(max-width:900px){
+  .hero .wrap,.contacto .wrap{grid-template-columns:1fr}
+  .rejilla{grid-template-columns:1fr 1fr}
+  .pasos{grid-template-columns:1fr 1fr}
+  nav ul{display:none}
+  .flota{right:8px}
+}
+@media(max-width:600px){
+  .rejilla,.trabajos,.pasos{grid-template-columns:1fr}
+  section{padding:72px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .lienzo>*{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap" aria-label="Principal">
+    <a href="#inicio" class="marca" aria-label="NexoWebSites, inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc6f0"/><stop offset="1" stop-color="#2563b8"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd0f5"/><stop offset="1" stop-color="#0f3a7a"/></linearGradient>
+          <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f3a7a"/><stop offset="1" stop-color="#3b82cf"/></linearGradient>
+        </defs>
+        <polygon points="8,16 21,9 21,50 8,57" fill="url(#g1)"/>
+        <polygon points="21,9 28,9 56,49 49,57" fill="url(#g2)"/>
+        <polygon points="43,16 56,9 56,50 43,57" fill="url(#g3)"/>
+      </svg>
+      Nexo<span>WebSites</span>
+    </a>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#trabajos">Nuestros trabajos</a></li>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+    </ul>
+    <a href="#contacto" class="btn">Contáctanos</a>
+  </nav>
+</header>
+
+<main id="inicio">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="saludo"><i>👋</i> ¡Bienvenido a NexoWebSites!</span>
+      <h1>Tu empresa merece una web que <em id="palabra">enamore</em></h1>
+      <p class="lead">Diseñamos páginas web rápidas, claras y hermosas para empresas que quieren que sus clientes las encuentren y las recuerden.</p>
+      <div class="acciones">
+        <a href="#trabajos" class="btn claro">Ver nuestros trabajos</a>
+        <a href="#contacto" class="btn">Quiero mi página</a>
+      </div>
+    </div>
+    <div class="escena">
+      <div class="nav-demo" id="demo">
+        <div class="barra"><i></i><i></i><i></i><span class="url">tuempresa.com</span></div>
+        <div class="lienzo" id="lienzo">
+          <div class="b-menu"><u></u><span><s></s><s></s><s></s></span></div>
+          <div class="b-hero"><s></s><s></s><u></u></div>
+          <div class="b-filas"><s></s><s></s><s></s></div>
+          <div class="b-texto"><s></s><s></s><s></s></div>
+          <div class="b-listo">✓ Tu web está lista</div>
+        </div>
+      </div>
+      <div class="flota">⚡ Se arma sola, casi</div>
+    </div>
+  </div>
+</section>
+
+<section class="servicios" id="servicios">
+  <div class="wrap">
+    <div class="cabecera">
+      <h2>Todo lo que tu web necesita</h2>
+      <p>Nos encargamos de cada detalle para que vos te dediques a tu negocio.</p>
+    </div>
+    <div class="rejilla">
+      <article class="serv"><div class="ico">🎨</div><h3>Diseño a medida</h3><p>Una web con tus colores, tu logo y tu personalidad. Nada de plantillas repetidas.</p></article>
+      <article class="serv"><div class="ico">📱</div><h3>Se ve bien en todo</h3><p>Celulares, tablets y computadoras. Tu página se adapta a cada pantalla.</p></article>
+      <article class="serv"><div class="ico">🚀</div><h3>Rápida y segura</h3><p>Carga en segundos y funciona sin sustos, para que nadie se vaya antes de ver tu oferta.</p></article>
+      <article class="serv"><div class="ico">🛒</div><h3>Tiendas online</h3><p>Catálogo, carrito y pagos para que vendas las 24 horas.</p></article>
+      <article class="serv"><div class="ico">🔎</div><h3>Aparecé en Google</h3><p>Estructura pensada para que tus clientes te encuentren cuando te buscan.</p></article>
+      <article class="serv"><div class="ico">💬</div><h3>Contacto directo</h3><p>Botones de WhatsApp para que te escriban con un toque.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="trabajos">
+  <div class="wrap">
+    <div class="cabecera">
+      <h2>Nuestros trabajos</h2>
+      <p>Pasá el cursor sobre cada proyecto y mirá cómo se recorre la página.</p>
+    </div>
+    <div class="trabajos" id="trabajos-lista"></div>
+  </div>
+</section>
+
+<section class="proceso" id="proceso">
+  <div class="wrap">
+    <div class="cabecera">
+      <h2>Así trabajamos con vos</h2>
+      <p>Un camino simple, de la idea a tu web publicada.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso"><h3>Conversamos</h3><p>Nos contás de tu empresa, tus clientes y qué querés lograr.</p></div>
+      <div class="paso"><h3>Diseñamos</h3><p>Te mostramos una propuesta visual con tu identidad para aprobarla.</p></div>
+      <div class="paso"><h3>Construimos</h3><p>Damos vida al diseño y lo probamos en todos los dispositivos.</p></div>
+      <div class="paso"><h3>Publicamos</h3><p>Lanzamos tu web y te acompañamos después con cualquier ajuste.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <div>
+      <h2>Contanos tu idea y empezamos</h2>
+      <p style="color:var(--suave);font-size:1.1rem">Completá el formulario y se abre un chat de WhatsApp con tu mensaje listo para enviarnos.</p>
+      <ul>
+        <li>💬 WhatsApp: +54 9 11 6423-0041</li>
+        <li>🕘 Podés comunicarte en cualquier momento</li>
+      </ul>
+    </div>
+    <form id="form">
+      <label>Nombre y apellido<input name="nombre" required autocomplete="name"></label>
+      <label>Nombre de la empresa<input name="empresa" required autocomplete="organization"></label>
+      <label>Descripción de la idea que quieren realizar<textarea name="idea" required placeholder="Contanos qué necesitás: tipo de página, qué querés mostrar, ejemplos que te gusten..."></textarea></label>
+      <button class="btn btn-wa" type="submit">Enviar por WhatsApp</button>
+      <p class="aviso">Se abrirá WhatsApp con tu mensaje; solo tenés que tocar enviar.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="marca" style="font-size:1.05rem">Nexo<span>WebSites</span></span>
+    <span>© <span id="anio"></span> NexoWebSites. Creamos webs para empresas.</span>
+  </div>
+</footer>
+
+<script>
+/* ====== EDITÁ AQUÍ TUS PROYECTOS ====== */
+const proyectos = [
+  {empresa:"Excelencia Animal",    desc:"Carta digital y reservas en línea.",        color:"#2563b8"},
+  {empresa:"Pilates Health Center Studio", desc:"Portafolio de arquitectura con galería.",   color:"#0f3a7a"}
+];
+/* ======================================= */
+
+/* ====== NÚMERO DE WHATSAPP (con código de país, sin + ni espacios) ====== */
+const WHATSAPP = "5491164230041";
+/* ======================================================================= */
+
+document.getElementById('trabajos-lista').innerHTML=proyectos.map(p=>`
+  <article class="caso">
+    <div class="vista"><div class="mini"><div class="tira"><i></i><i></i><i></i></div>
+      <div class="pagina" style="--c:${p.color}">
+        <div class="h"><s></s><s></s></div><div class="g"><s></s><s></s><s></s></div>
+        <div class="l"></div><div class="l" style="width:70%"></div><div class="banda"></div>
+        <div class="g"><s></s><s></s><s></s></div><div class="l"></div><div class="banda"></div>
+      </div></div></div>
+    <div class="info"><h3>${p.empresa}</h3><p>${p.desc}</p></div>
+  </article>`).join('');
+
+/* Palabra que cambia en el título */
+const palabras=['enamore','venda','destaque','inspire'];let k=0;
+const pal=document.getElementById('palabra');
+pal.style.transition='opacity .25s';
+setInterval(()=>{k=(k+1)%palabras.length;pal.style.opacity=0;setTimeout(()=>{pal.textContent=palabras[k];pal.style.opacity=1},250)},2800);
+
+/* Navegador que se arma en bucle */
+const lienzo=document.getElementById('lienzo');
+function armar(){lienzo.classList.remove('arma');void lienzo.offsetWidth;lienzo.classList.add('arma')}
+armar();setInterval(armar,6500);
+
+/* Inclinación 3D con el cursor */
+const demo=document.getElementById('demo'),escena=demo.parentElement;
+escena.addEventListener('mousemove',e=>{
+  const r=escena.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  demo.style.transform=`rotateY(${x*12}deg) rotateX(${-y*10}deg)`;
+});
+escena.addEventListener('mouseleave',()=>demo.style.transform='');
+
+/* Formulario -> WhatsApp */
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const msg=`¡Hola NexoWebSites! 👋\n\n`+
+    `*Nombre y apellido:* ${f.get('nombre').trim()}\n`+
+    `*Empresa:* ${f.get('empresa').trim()}\n`+
+    `*Mi idea:* ${f.get('idea').trim()}\n\n`+
+    `Quisiera una página web para mi empresa.`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank');
+  e.target.reset();
+});
+
+document.getElementById('anio').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
